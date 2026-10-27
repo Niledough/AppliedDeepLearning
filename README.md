@@ -34,7 +34,7 @@ In order to ensure that $(2)$ i.e. energy conservation is respected, the model i
 \mathcal{L}_{\text{HNN}} = \left\| \frac{\partial \mathcal{H}_\theta}{\partial \boldsymbol{p}} - \dot{\boldsymbol{q}} \right\|_2^2 + \left\| \frac{\partial \mathcal{H}_\theta}{\partial \boldsymbol{q}} + \dot{\boldsymbol{p}} \right\|_2^2. \tag{4}
 ```
 
-Since (3) holds for any scalar function, the learned $\mathcal{H}_\theta$ is conserved by construction, independent of the training outcome. Training only determines how closely $\mathcal{H}_\theta$ resembles the true energy of the system.
+Since (3) holds for any scalar function, the learned $`\mathcal{H}_\theta`$ is conserved by construction, independent of the training outcome. Training only determines how closely $`\mathcal{H}_\theta`$ resembles the true energy of the system.
 
 The HNN assumes a closed system and therefore cannot represent energy dissipation or external forces. [ref 2][2] address this by embedding the port-Hamiltonian formulation instead:
 
@@ -45,13 +45,13 @@ The HNN assumes a closed system and therefore cannot represent energy dissipatio
 + \begin{bmatrix} \boldsymbol{0} \\ \boldsymbol{F}(t) \end{bmatrix} \tag{5}
 ```
 
-where $\boldsymbol{N} \succeq 0$ models damping and $\boldsymbol{F}(t)$ an external time-dependent force. Three components are learned: a network for the Hamiltonian $\mathcal{H}_{\theta_1}(\boldsymbol{q}, \boldsymbol{p})$, a network for the force $\boldsymbol{F}_{\theta_2}(t)$, and a single trainable parameter for the damping $\boldsymbol{N}_{\theta_3}$. Energy is no longer conserved, but it can only change through these two terms:
+where $\boldsymbol{N} \succeq 0$ models damping and $\boldsymbol{F}(t)$ an external time-dependent force. Three components are learned: a network for the Hamiltonian $`\mathcal{H}_{\theta_1}(\boldsymbol{q}, \boldsymbol{p})`$, a network for the force $`\boldsymbol{F}_{\theta_2}(t)`$, and a single trainable parameter for the damping $`\boldsymbol{N}_{\theta_3}`$. Energy is no longer conserved, but it can only change through these two terms:
 
 ```math
 \frac{d\mathcal{H}}{dt} = -\frac{\partial \mathcal{H}}{\partial \boldsymbol{p}}^{\top} \boldsymbol{N} \frac{\partial \mathcal{H}}{\partial \boldsymbol{p}} + \frac{\partial \mathcal{H}}{\partial \boldsymbol{p}}^{\top} \boldsymbol{F}(t) \tag{6}
 ```
 
-i.e. damping can only remove energy, while the force injects or extracts power. The loss extends (4) by $L_1$ penalties on force and damping, which discourage the network from attributing dynamics to spurious forcing or damping terms:
+i.e. damping can only remove energy, while the force injects or extracts power. The loss extends (4) by $`L_1`$ penalties on force and damping, which discourage the network from attributing dynamics to spurious forcing or damping terms:
 
 ```math
 \mathcal{L}_{\text{pHNN}} = \left\| \hat{\dot{\boldsymbol{q}}} - \dot{\boldsymbol{q}} \right\|_2^2 + \left\| \hat{\dot{\boldsymbol{p}}} - \dot{\boldsymbol{p}} \right\|_2^2 + \lambda_F \left\| \boldsymbol{F}_{\theta_2} \right\|_1 + \lambda_N \left\| \boldsymbol{N}_{\theta_3} \right\|_1. \tag{7}
