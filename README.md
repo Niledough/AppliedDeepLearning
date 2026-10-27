@@ -65,6 +65,21 @@ This project aims to do system identification using a pHNN following [ref 2][2] 
 
 As the phenomena that the pHNN wants to recover can often be described by simple equations, generating the data from simulations is a commonly used and very practical approach. In systems where energy is preserved, it is likely that oscillations occur, so driven, dampened oscillators lend themselves very well to demonstrating the capabilities of the method. Canonical examples of this are forced and dampened mass-spring systems and Duffing oscillators, which are both used for benchmarking in [ref 2][2]. Because both oscillators can be represented as Ordinary Differential Equations (ODEs), exact solutions can be determined through standard methods. Finally, sampling and possibly perturbing the signal with noise yields input ($x$) and output ($\dot{x}$) data for the Machine Learning (ML) problem.
 
+## Work Breakdown
+
+| Task                               | Content                                                      | Estimate |
+| ---------------------------------- | ------------------------------------------------------------ | -------- |
+| Literature review & proposal       | Reading HNN / pHNN papers, writing this proposal             | 5 h      |
+| Dataset collection                 | Implementing the forced/damped mass-spring and Duffing systems, generating trajectories and time derivatives with an ODE solver, adding measurement noise, train/test splits | 5 h      |
+| Designing and building the network | Implementing the baseline HNN and pHNN (Hamiltonian network, force network $F(t)$, damping parameter $N$), derivative computation via autograd, loss with $L_1$ regularization | 10 h     |
+| Training and fine-tuning           | Reproducing the pHNN baseline results, grid search over $\lambda_F$ and $\lambda_N$, experimenting with architecture changes, evaluation of state/energy rollout error, noise robustness study | 4 h      |
+| Building an application            | Small demo showing rollouts, learned force and damping, and energy over time compared to ground truth | 10 h     |
+| Writing the final report           | Method, experiments, results, discussion                     | 12 h     |
+| Preparing the presentation         | Slides and rehearsal                                         | 3 h      |
+| **Total**                          |                                                              | **75 h** |
+
+Incorporating known forcing terms for control is a stretch goal and is not included in this estimate.
+
 ## References
 
 1.   Greydanus, Dzamba, Yosinski: [Hamiltonian Neural Networks](https://arxiv.org/abs/1906.01563), NeurIPS 2019 
