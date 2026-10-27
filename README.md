@@ -28,7 +28,7 @@ From (2) we can see that moving in the direction $\boldsymbol{S}_{\mathcal{H}} =
 \frac{d\mathcal{H}}{dt} = \frac{\partial \mathcal{H}}{\partial \boldsymbol{q}}^{\top}\dot{\boldsymbol{q}} + \frac{\partial \mathcal{H}}{\partial \boldsymbol{p}}^{\top}\dot{\boldsymbol{p}} = \frac{\partial \mathcal{H}}{\partial \boldsymbol{q}}^{\top}\frac{\partial \mathcal{H}}{\partial \boldsymbol{p}} - \frac{\partial \mathcal{H}}{\partial \boldsymbol{p}}^{\top}\frac{\partial \mathcal{H}}{\partial \boldsymbol{q}} = 0. \tag{3}
 ```
 
-In order to ensure that $(2)$ i.e. energy conservation is respected, the model is trained to output a single scalar $\mathcal{H}_\theta(\boldsymbol{q}, \boldsymbol{p})$ which is then differentiated with respect to its input states ($\boldsymbol{q}, \boldsymbol{p}$). This gradient can then be compared to the temporal derivative of the states to yield the cost function $(4)$.
+In order to ensure that $(2)$ i.e. energy conservation is respected, the model is trained to output a single scalar $`\mathcal{H}_\theta(\boldsymbol{q}, \boldsymbol{p})`$ which is then differentiated with respect to its input states ($\boldsymbol{q}, \boldsymbol{p}$). This gradient can then be compared to the temporal derivative of the states to yield the cost function $(4)$.
 
 ```math
 \mathcal{L}_{\text{HNN}} = \left\| \frac{\partial \mathcal{H}_\theta}{\partial \boldsymbol{p}} - \dot{\boldsymbol{q}} \right\|_2^2 + \left\| \frac{\partial \mathcal{H}_\theta}{\partial \boldsymbol{q}} + \dot{\boldsymbol{p}} \right\|_2^2. \tag{4}
